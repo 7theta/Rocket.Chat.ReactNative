@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
 apply plugin: "io.fabric"
 apply plugin: "com.google.firebase.firebase-perf"
-apply plugin: 'com.bugsnag.android.gradle'
+//apply plugin: 'com.bugsnag.android.gradle'
 
 import com.android.build.OutputFile
 
@@ -83,6 +83,7 @@ project.ext.react = [
     entryFile: "index.js",
     bundleAssetName: "app.bundle",
     iconFontNames: [ 'custom.ttf' ],
+    bundleInRelease: false,
     enableHermes: true,  // clean and rebuild if changing
 ]
 
@@ -140,7 +141,7 @@ android {
         versionCode VERSIONCODE as Integer
         versionName "4.7.0"
         vectorDrawables.useSupportLibrary = true
-        manifestPlaceholders = [BugsnagAPIKey: BugsnagAPIKey as String]
+//        manifestPlaceholders = [BugsnagAPIKey: BugsnagAPIKey as String]
     }
 
     signingConfigs {

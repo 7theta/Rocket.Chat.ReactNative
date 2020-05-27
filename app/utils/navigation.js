@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { analytics, leaveBreadcrumb } from './log';
+// import { analytics } from './log';
 import { themes } from '../constants/colors';
 
 export const defaultHeader = {
@@ -44,7 +44,7 @@ export const onNavigationStateChange = (prevState, currentState) => {
 	const prevScreen = getActiveRouteName(prevState);
 
 	if (prevScreen !== currentScreen) {
-		analytics().setCurrentScreen(currentScreen);
-		leaveBreadcrumb(currentScreen, { type: 'navigation' });
+		// analytics().setCurrentScreen(currentScreen);
+		// leaveBreadcrumb(currentScreen, { type: 'navigation' });
 	}
 };
