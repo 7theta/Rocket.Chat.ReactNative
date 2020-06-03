@@ -12,7 +12,7 @@
     "log-android": "react-native log-android",
     "bundle-android-dev": "node --expose-gc --max_old_space_size=8192 ./node_modules/react-native/local-cli/cli.js bundle --entry-file ./index.js --platform android --dev true --bundle-output android/app/src/main/assets/app.bundle --assets-dest android/app/src/main/res --reset-cache",
     "bundle-android-release": "node --expose-gc --max_old_space_size=8192 ./node_modules/react-native/local-cli/cli.js bundle --entry-file ./index.js --platform android --dev false --bundle-output android/app/src/main/assets/app.bundle --assets-dest android/app/src/main/res --reset-cache",
-    "build-android-release": "node --expose-gc --max_old_space_size=8192 ./node_modules/react-native/local-cli/cli.js bundle --entry-file ./index.js --platform android --dev false --bundle-output android/app/src/main/assets/app.bundle --assets-dest android/app/src/main/res --reset-cache && cd android && ./gradlew assembleRelease && cd ..",
+    "build-android-release": "node --expose-gc --max_old_space_size=8192 ./node_modules/react-native/local-cli/cli.js bundle --entry-file ./index.js --platform android --dev false --bundle-output android/app/src/main/assets/app.bundle --assets-dest android/app/src/main/res --reset-cache && rm ../node_modules/@react-native-community/slider/android/build/outputs/apk/androidTest/debug/output.json && cd android && ./gradlew assembleRelease && cd ..",
     "android": "react-native run-android",
     "snyk-protect": "snyk protect",
     "precommit": "eslint . && jest",
