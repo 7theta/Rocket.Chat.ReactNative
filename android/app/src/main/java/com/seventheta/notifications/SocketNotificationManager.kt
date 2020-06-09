@@ -142,7 +142,7 @@ class SocketNotificationManager(val context: Context) {
         intent.putExtra(NotificationsDeliveryService.EXTRA_NOTIFICATION_DATA, data.data)
         val contentIntent = PendingIntent.getService(context, System.currentTimeMillis().toInt(), intent, PendingIntent.FLAG_ONE_SHOT)
 
-        val channelId = "rocketchatrn_channel_01"
+        val channelId = "7theta_rocketchatrn_channel_01"
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
                 .setContentTitle("New message from ${data.senderUsername}")
                 .setContentText(data.message)
