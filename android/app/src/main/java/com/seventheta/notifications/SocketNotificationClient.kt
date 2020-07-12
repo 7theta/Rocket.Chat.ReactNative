@@ -18,6 +18,7 @@ class SocketNotificationClient(
 
     data class LoginData(
             val host: String,
+            val port: Int?,
             val userId: String,
             val userToken: String) {
 
@@ -48,7 +49,6 @@ class SocketNotificationClient(
     init {
         val wsClient = OkHttpClient.Builder().apply {
             readTimeout(0, TimeUnit.MILLISECONDS)
-            hostnameVerifier { hostname, session -> true }
         }.build()
         val ddpClient = DDPClient(wsClient)
         this.client = ddpClient
@@ -60,10 +60,11 @@ class SocketNotificationClient(
         }
 
         val host = loginData.host
+        val port = loginData.port
         val myUserId = loginData.userId
         val token = loginData.userToken
 
-        val url = "wss://$host/websocket"
+        val url = "wss://$host${port?.let { ":$it" } ?: ""}/websocket"
 
         val rooms = mutableMapOf<String, RoomData>()
         val subNum = AtomicInteger(100)
@@ -86,7 +87,6 @@ class SocketNotificationClient(
                 Log.e("SOCKETNOTIS", "got onClose for $host.")
                 if (!manualClose) {
                     Log.d("SOCKETNOTIS", "non-manual close, reconnecting...")
-                    connect { }
                     SocketServiceUtils.serviceReconnect(context)
                 }
             }
@@ -210,7 +210,6 @@ class SocketNotificationClient(
             if (task.error != null) {
                 Log.e("SOCKETNOTIS", "gotError", task.error)
                 Log.d("SOCKETNOTIS", "attempting reconnect with restart")
-                connect { }
                 SocketServiceUtils.serviceReconnect(context)
             }
             isConnecting = false
